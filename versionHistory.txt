@@ -1,0 +1,4 @@
+2.0 - Quickstart
+2.1 - Wiederholungsgeschwindigkeit einstellbar
+    - Ping-Zeiten werden dem Sender angezeigt.
+    - Receiver: Port wird bei eingehender Verbindung angezeigt.
