@@ -30,7 +30,6 @@ class ReceiverClient(object):
             print("Missing Information:", validate.findMissingInformation(self.connectionType, self.port, self.ip))
             print("Start with 'help' to print a help Page.")
             sys.exit(1)
-
     # Reads the Systems IP-Address.
     def getIPaddress(self):
         return socket.gethostbyname(socket.gethostname())
