@@ -3,7 +3,7 @@ from connection import sender as sender, receiver as receiver
 import re
 from other import generalInformation
 
-VERSION = 2.1
+VERSION = 2.11
 
 TCP = 1
 UDP = 2
