@@ -12,7 +12,7 @@ Receiver and Sender in one Python Application.
 
 ## Parameter list:
   ```-r               Initializes the the Receiver.
-  -udp             Set the transport protocol to either TCP or UDP.
+  -udp             Set the transport protocol to UDP (Default: TCP).
   -ip<IP>          Insert the IP-Address for the Sender or Receiver.
   -cip              (Receiver Only) Prints a List of all available/choosable IP-Addresses.
   -port<port>      Insert the Port from the Receiver.
