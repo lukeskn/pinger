@@ -51,7 +51,7 @@ class SenderClient(object):
                 data, server = sock.recvfrom(1024)
                 if data:
                     end = time.time()
-                    print("UDP answer from:", server[0], "TIME:", int((end-start)*1000), "ms")
+                    print("UDP answer from: {}:{}".format(server[0], self.port), "TIME:", int((end-start)*1000), "ms")
             except KeyboardInterrupt:
                     sys.exit(0)
             except:
@@ -83,7 +83,7 @@ class SenderClient(object):
                 data = sock.recv(1024)
                 end = time.time()
                 sock.close()
-                print("TCP answer from:", self.ip, "TIME:", int((end-start)*1000), "ms")
+                print("TCP answer from: {}:{}".format(self.ip, self.port), "TIME:", int((end-start)*1000), "ms")
             except KeyboardInterrupt:
                 sys.exit(0)
             except:

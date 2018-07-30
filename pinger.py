@@ -1,9 +1,9 @@
 import sys
 from connection import sender as sender, receiver as receiver
 import re
-from other import generalInformation
+from other import generalInformation, validate
 
-VERSION = 2.1
+VERSION = 2.12
 
 TCP = 1
 UDP = 2
@@ -96,16 +96,16 @@ try:
                     print(repeatsSecond)
                 except IndexError:
                     repeatsSecond = NOT_SET
-            elif param[0] == "port" or param[0] == "p":
+            elif param[:4] == "port" or param[0] == "p":
                 try:
                     port = removeCharacterFromString(sys.argv[i])
                     port = int(port[0])
                 except IndexError:
                     port = NOT_SET
-            elif param[0] == "ip":
+            elif param[:2] == "ip":
                 try:
-                    ip = removeCharacterFromString(sys.argv[i])
-                    ip = int(ip[0])
+                    ip = sys.argv[i]
+                    ip = re.search("\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$", ip).group()
                 except IndexError:
                     ip = NOT_SET
             elif param[0] == "t":
