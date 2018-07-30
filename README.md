@@ -4,9 +4,9 @@ A small Ping-Tool for TCP and UDP.
 Receiver and Sender in one Python Application.
 
 ## How to start:
-1. Start the Receiver with an IP and/or a Port. Default TCP is used.
+1. Start the Receiver with an IP and/or a Port. Default TCP is used.<br>
   1a. The Receiver will show the IP/Port. This means the Receiver is listening.
-2. Start the Sender with the IP and Port from the Receiver. Default TCP is used.
+2. Start the Sender with the IP and Port from the Receiver. Default TCP is used.<br>
   2a. The Sender will try to get an answer from the Receiver
 
 
