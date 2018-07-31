@@ -76,9 +76,10 @@ class ReceiverClient(object):
                     print('TCP Connection from: {}:{}'.format(addr[0], self.port))
 
                     data = conn.recv(1024)
+                    message = data.decode('utf-8')
                     if not data:
                         break
-                    conn.sendall(b'test')
+                    conn.sendall(message.encode('utf-8'))
                 except:
                     print("Something went wrong")
                     break
