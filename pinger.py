@@ -3,7 +3,7 @@ from connection import sender as sender, receiver as receiver
 import re
 from other import generalInformation, validate
 
-VERSION = 2.12
+VERSION = 2.210
 
 TCP = 1
 UDP = 2
@@ -13,6 +13,7 @@ NOT_SET = -1
 DEFAULT_REPEATS = 4
 
 repeatsSecond = NOT_SET
+messageSize = 16 # Default messagesize
 connectionType = TCP
 clientType = SENDER
 port = NOT_SET
@@ -25,7 +26,7 @@ def noParamAtStart():
 
 # Initializes the Sender.
 def startSender():
-    snd = sender.SenderClient(connectionType, port, ip, repeat, repeatsSecond)
+    snd = sender.SenderClient(connectionType, port, ip, repeat, repeatsSecond, messageSize)
 
 # Initializes the Receiver.
 def startReceiver():
@@ -71,6 +72,9 @@ def splitParam(param):
 # Returns all digits from a given String.
 def removeCharacterFromString(string):
     return re.findall('\d+', string)
+#sys.argv.append("-r")
+#sys.argv.append("-p6363")
+#sys.argv.append("-udp")
 try:
     # Read Start Parameter
     if len(sys.argv) > 1:
@@ -86,6 +90,12 @@ try:
                 connectionType = TCP
             elif param == "udp":
                 connectionType = UDP
+            elif param[0] == "l":
+                try:
+                    messageSize = removeCharacterFromString(sys.argv[i])
+                    messageSize = int(messageSize[0])
+                except IndexError:
+                    messageSize = NOT_SET
             elif param == "cip":
                 generalInformation.printIPs()
                 sys.exit(0)
@@ -93,7 +103,6 @@ try:
                 try:
                     repeatsSecond = removeCharacterFromString(sys.argv[i])
                     repeatsSecond = int(repeatsSecond[0])
-                    print(repeatsSecond)
                 except IndexError:
                     repeatsSecond = NOT_SET
             elif param[:4] == "port" or param[0] == "p":
