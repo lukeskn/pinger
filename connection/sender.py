@@ -9,17 +9,19 @@ DEFAULT_SPEED = 1
 class SenderClient(object):
 
     # Initializes the Sender Object
-    def __init__(self, connectionType, port, ip, repeat, repeatsSecond):
+    def __init__(self, connectionType, port, ip, repeat, repeatsSecond, messageSize):
         self.connectionType = connectionType
         self.port = port
         self.ip = ip
         self.repeat = repeat
+        self.messageSize = messageSize
+        self.message = ""
         self.repeatsSecond = repeatsSecond
         self.startSender()
 
     # Checks if all important Information are given and tries to start the TCP or UDP sender.
     def startSender(self):
-
+        self.message = self.generateMessage()
         if validate.allInformationGiven(self.connectionType, self.ip, self.port):
             if self.connectionType == 1:
                 print("TCP Sender successfully started.")
@@ -35,6 +37,12 @@ class SenderClient(object):
             print("Missing Information:", validate.findMissingInformation(self.connectionType, self.ip, self.port))
             print("Start with 'help' to print a help Page.")
             sys.exit(1)
+    def generateMessage(self):
+        message = ""
+        for i in range(self.messageSize):
+            message += "1"
+        return message
+
     def getSleeptimefromRepeats(self):
         if self.repeatsSecond == NOT_SET:
             return DEFAULT_SPEED
@@ -46,7 +54,7 @@ class SenderClient(object):
         def doUDPConnection():
             time.sleep(self.getSleeptimefromRepeats())
             start = time.time()
-            sock.sendto(message.encode(), addr)
+            sock.sendto(self.message.encode(), addr)
             try:
                 data, server = sock.recvfrom(1024)
                 if data:
@@ -79,7 +87,7 @@ class SenderClient(object):
 
                 sock.connect((self.ip, int(self.port)))
                 start = time.time()
-                sock.sendall(b'-1')
+                sock.sendall(self.message.encode('utf-8'))
                 data = sock.recv(1024)
                 end = time.time()
                 sock.close()
