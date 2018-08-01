@@ -1,7 +1,9 @@
-2.0 - Quickstart
-2.1 - Wiederholungsgeschwindigkeit einstellbar
-    - Ping-Zeiten werden dem Sender angezeigt.
-    - Receiver: Port wird bei eingehender Verbindung angezeigt.
-2.12 - "-ip" Parameter wird nun richtig erkannt.
-2.121 - Help-screen improved
-2.2 - Paketgröße kann verändert werden.
+2.0 - Added Quickstart functionality
+2.1 - Changable Repeatspeed
+    - Sender shows ping-time
+    - Sender + Receiver shows used port
+2.12 - fixed input problem with the "-ip" parameter
+2.121 - improved help-screen
+2.2 - Changable Packet-Size
+2.3 - Added custom text functionality
+    - custom text can be set from a .txt file
