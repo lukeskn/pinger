@@ -1,7 +1,9 @@
 from other import validate
 import socket
 import sys
+import re
 NOT_SET = -1
+DEFAULT_MESSAGE_CHAR = "1"
 class ReceiverClient(object):
 
     # Initializes the Receiver Object
@@ -45,11 +47,13 @@ class ReceiverClient(object):
                 print("Something went wrong. Try again")
             while True:
                 try:
-                    message, address = serverSocket.recvfrom(1024)
-                    if message:
+                    data, address = serverSocket.recvfrom(1024)
+                    if data:
+                        message = data.decode("utf-8")
                         print("UDP Connection from:{}:{}".format(address[0], self.port))
-                    message = message.upper()
-                    serverSocket.sendto(message, address)
+                        if not re.match("^[1]+$", message):
+                            print("message: {}".format(message))
+                    serverSocket.sendto(data, address)
                 except KeyboardInterrupt:
                     sys.exit(1)
                 except:
@@ -73,10 +77,13 @@ class ReceiverClient(object):
                 try:
                     serverSocket.listen(1)
                     conn, addr = serverSocket.accept()
-                    print('TCP Connection from: {}:{}'.format(addr[0], self.port))
-
                     data = conn.recv(1024)
                     message = data.decode('utf-8')
+
+                    print('TCP Connection from: {}:{}'.format(addr[0], self.port))
+                    if not re.match("^[1]+$", message):
+                        print("message: {}".format(message))
+
                     if not data:
                         break
                     conn.sendall(message.encode('utf-8'))
