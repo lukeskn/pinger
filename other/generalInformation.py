@@ -1,4 +1,5 @@
 import socket
+import sys
 # Prints help information.
 def sendHelpInformation(version):
     print("")
@@ -21,6 +22,11 @@ def sendHelpInformation(version):
     print("                        > 5 could take longer as a second.")
     print("    -l<size>          Change the Packet-Size (Default: 16 Bytes [Data]) ")
     print("                        > 1024 and the Receiver will answer with a 1024 Byte Packet. ")
+    print("    -$a\"message\"    Send a custom message to the Receiver.")
+    print("                        > 1024 and the Receiver will answer with a 1024 Byte Packet. ")
+    print("    -$f\"file\"       Send a custom message from a file.")
+    print("                        One Line = one Packet")
+    print("                        > 1024 a Line and the Receiver will answer with a 1024 Byte Packet. ")
     print("")
     print(" Quick start:")
     print("    <ip>:<port>      Initializes the Sender/Receiver for a TCP connection.")
@@ -28,6 +34,8 @@ def sendHelpInformation(version):
     print("    -t<number>       Can also be used with the Quick Start.")
     print("    -re<repeats>     ")
     print("    -l<size>         ")
+    print("    -$a\"message\"   ")
+    print("    -$f\"file\"      ")
     print("    -r               Starts the Receiver.")
     print("                        No Argument to start the Sender. (Default)")
 
@@ -44,3 +52,16 @@ def printIPs():
     for item in enumerate(ipList):
         print(item[1])
 
+def getInput(url):
+    try:
+        file = open(url)
+    except Exception:
+        print("File-Error")
+        sys.exit(3)
+    lines = [line.rstrip('\n') for line in file]
+    return lines
+
+def importFile(url):
+    message = getInput(url)
+    repeat = len(message)
+    return message,repeat
