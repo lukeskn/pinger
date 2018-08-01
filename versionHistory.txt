@@ -2,3 +2,6 @@
 2.1 - Wiederholungsgeschwindigkeit einstellbar
     - Ping-Zeiten werden dem Sender angezeigt.
     - Receiver: Port wird bei eingehender Verbindung angezeigt.
+2.12 - "-ip" Parameter wird nun richtig erkannt.
+2.121 - Help-screen improved
+2.2 - Paketgröße kann verändert werden.
