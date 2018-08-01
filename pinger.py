@@ -3,7 +3,7 @@ from connection import sender as sender, receiver as receiver
 import re
 from other import generalInformation, validate
 
-VERSION = 2.210
+VERSION = 2.35
 
 TCP = 1
 UDP = 2
@@ -19,6 +19,8 @@ clientType = SENDER
 port = NOT_SET
 ip = NOT_SET
 repeat = DEFAULT_REPEATS
+message = NOT_SET
+file = NOT_SET
 
 # If no Start Parameters are given, this Method will ask for the ClientType.
 def noParamAtStart():
@@ -26,7 +28,7 @@ def noParamAtStart():
 
 # Initializes the Sender.
 def startSender():
-    snd = sender.SenderClient(connectionType, port, ip, repeat, repeatsSecond, messageSize)
+    snd = sender.SenderClient(connectionType, port, ip, repeat, repeatsSecond, messageSize, message, file)
 
 # Initializes the Receiver.
 def startReceiver():
@@ -72,9 +74,6 @@ def splitParam(param):
 # Returns all digits from a given String.
 def removeCharacterFromString(string):
     return re.findall('\d+', string)
-#sys.argv.append("-r")
-#sys.argv.append("-p6363")
-#sys.argv.append("-udp")
 try:
     # Read Start Parameter
     if len(sys.argv) > 1:
@@ -96,6 +95,18 @@ try:
                     messageSize = int(messageSize[0])
                 except IndexError:
                     messageSize = NOT_SET
+            elif param[:2] == "$a":
+                try:
+                    message = sys.argv[i]
+                    message = message[3:]
+                except Exception:
+                    message = NOT_SET
+            elif param[:2] == "$f":
+                try:
+                    file = sys.argv[i]
+                    file = file[3:]
+                except Exception:
+                    file = NOT_SET
             elif param == "cip":
                 generalInformation.printIPs()
                 sys.exit(0)
