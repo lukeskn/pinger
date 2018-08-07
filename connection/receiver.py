@@ -57,7 +57,6 @@ class ReceiverClient(object):
                 except KeyboardInterrupt:
                     sys.exit(1)
                 except:
-                    print("Something went wrong")
                     break
         except KeyboardInterrupt:
             sys.exit(2)
@@ -88,8 +87,6 @@ class ReceiverClient(object):
                         break
                     conn.sendall(message.encode('utf-8'))
                 except:
-                    print("Something went wrong")
                     break
-            conn.close()
         except KeyboardInterrupt:
             sys.exit(2)
